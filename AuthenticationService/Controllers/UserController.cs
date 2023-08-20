@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace AuthenticationService.Controllers
@@ -7,13 +8,15 @@ namespace AuthenticationService.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
+        private readonly IMapper mapper;
         private readonly ILogger logger;
-        public UserController(ILogger logger)
+        public UserController(ILogger logger, IMapper mapper)
         {
             this.logger = logger;
+            this.mapper = mapper;
 
-            logger.WriteEvent("Сообщение о событии в программе");
-            logger.WriteError("Сообщение об ошибки в программе");
+            //logger.WriteEvent("Сообщение о событии в программе");
+            //logger.WriteError("Сообщение об ошибки в программе");
         }
 
         [HttpGet]
@@ -45,7 +48,7 @@ namespace AuthenticationService.Controllers
                 Login = "ivanov"
             };
 
-            UserViewModel userViewModel = new UserViewModel(user);
+            var userViewModel = mapper.Map<UserViewModel>(user);
 
             return userViewModel;
         }
