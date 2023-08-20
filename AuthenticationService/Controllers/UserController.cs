@@ -48,7 +48,7 @@ namespace AuthenticationService.Controllers
             };
         }
 
-        [Authorize]
+        [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("viewmodel")]
         public UserViewModel GetUserViewModel()
@@ -63,8 +63,8 @@ namespace AuthenticationService.Controllers
                 Login = "ivanov",
                 Role = new Role()
                 {
-                    Id = 1,
-                    Name = "Пользователь"
+                    Id = 2,
+                    Name = "Администратор"
                 }
             };
 
@@ -98,7 +98,8 @@ namespace AuthenticationService.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
             };
 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(
