@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Threading.Tasks;
 
 namespace AuthenticationService
 {
@@ -40,6 +41,19 @@ namespace AuthenticationService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
             });
+
+            services.AddAuthentication(options => options.DefaultScheme = "Cookies")
+                .AddCookie("Cookies", options =>
+                {
+                    options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+                    {
+                        OnRedirectToLogin = redirectContext =>
+                        {
+                            redirectContext.HttpContext.Response.StatusCode = 401;
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +67,8 @@ namespace AuthenticationService
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
