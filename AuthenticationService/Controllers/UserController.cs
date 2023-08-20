@@ -30,5 +30,24 @@ namespace AuthenticationService.Controllers
                 Password = "1234"
             };
         }
+
+        [HttpGet]
+        [Route("viewmodel")]
+        public UserViewModel GetUserViewModel()
+        {
+            User user = new User()
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Иван",
+                LastName = "Иванов",
+                Email = "ivan@gmail.com",
+                Password = "11111122222qq",
+                Login = "ivanov"
+            };
+
+            UserViewModel userViewModel = new UserViewModel(user);
+
+            return userViewModel;
+        }
     }
 }
