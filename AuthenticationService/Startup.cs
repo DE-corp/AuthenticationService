@@ -30,6 +30,8 @@ namespace AuthenticationService
 
             services.AddSingleton(mapper);
 
+            // Подключаем UserRepository
+            services.AddSingleton<IUserRepository, UserRepository>();
 
             services.AddControllers();
         }

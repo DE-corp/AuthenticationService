@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace AuthenticationService.Controllers
 {
@@ -10,10 +11,12 @@ namespace AuthenticationService.Controllers
     {
         private readonly IMapper mapper;
         private readonly ILogger logger;
-        public UserController(ILogger logger, IMapper mapper)
+        private readonly IUserRepository userRepository;
+        public UserController(ILogger logger, IMapper mapper, IUserRepository userRepository)
         {
             this.logger = logger;
             this.mapper = mapper;
+            this.userRepository = userRepository;
 
             //logger.WriteEvent("Сообщение о событии в программе");
             //logger.WriteError("Сообщение об ошибки в программе");
@@ -52,5 +55,13 @@ namespace AuthenticationService.Controllers
 
             return userViewModel;
         }
+
+        [HttpGet]
+        [Route("GetByLogin")]
+        public User GetUserByLogin(string login) => userRepository.GetByLogin(login);
+
+        [HttpGet]
+        [Route("all")]
+        public IEnumerable<User> GetAllUsers() => userRepository.GetAll();
     }
 }
