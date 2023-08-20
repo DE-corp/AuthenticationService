@@ -39,7 +39,12 @@ namespace AuthenticationService.Controllers
                 LastName = "Evdeokimov",
                 Email = "test@test.com",
                 Login = "test",
-                Password = "1234"
+                Password = "1234",
+                Role = new Role()
+                {
+                    Id = 1,
+                    Name = "Пользователь"
+                }
             };
         }
 
@@ -55,7 +60,12 @@ namespace AuthenticationService.Controllers
                 LastName = "Иванов",
                 Email = "ivan@gmail.com",
                 Password = "11111122222qq",
-                Login = "ivanov"
+                Login = "ivanov",
+                Role = new Role()
+                {
+                    Id = 1,
+                    Name = "Пользователь"
+                }
             };
 
             var userViewModel = mapper.Map<UserViewModel>(user);

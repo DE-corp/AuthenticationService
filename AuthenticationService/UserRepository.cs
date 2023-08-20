@@ -18,7 +18,11 @@ namespace AuthenticationService
                     LastName = "Evdokimov",
                     Email = "test@test.com",
                     Login = "test",
-                    Password = "1234"},
+                    Password = "1234",
+                    Role = new Role() {
+                        Id = 1,
+                        Name = "Пользователь"
+                    }},
 
                 new User(){
                     Id = Guid.NewGuid(),
@@ -26,7 +30,11 @@ namespace AuthenticationService
                     LastName = "Иванов",
                     Email = "ivan@gmail.com",
                     Password = "11111122222qq",
-                    Login = "ivanov"},
+                    Login = "ivanov",
+                    Role = new Role() {
+                        Id = 2,
+                        Name = "Администратор"
+                    }},
 
                 new User(){
                     Id = Guid.NewGuid(),
@@ -34,7 +42,11 @@ namespace AuthenticationService
                     LastName = "Смирнова",
                     Email = "oksana@test.ru",
                     Login = "oks",
-                    Password = "1234"}
+                    Password = "1234",
+                    Role = new Role() {
+                        Id = 1,
+                        Name = "Пользователь"
+                    }}
             };
         }
 
