@@ -1,3 +1,4 @@
+using AuthenticationService.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -67,6 +68,8 @@ namespace AuthenticationService
             }
 
             app.UseRouting();
+
+            app.UseLogMiddleware();
 
             app.UseAuthentication();
 
