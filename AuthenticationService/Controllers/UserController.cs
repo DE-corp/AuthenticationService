@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace AuthenticationService.Controllers
 {
+    [ExceptionHandler]
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
