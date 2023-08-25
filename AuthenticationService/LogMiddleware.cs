@@ -16,7 +16,7 @@ namespace AuthenticationService
 
         public async Task Invoke(HttpContext httpContext)
         {
-            _logger.WriteEvent("Я твой Middleware");
+            _logger.WriteEvent($"Обращение к серверу с {httpContext.Request.Host}") ;
             await _next(httpContext);
         }
     }
